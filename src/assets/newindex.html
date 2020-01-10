@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>三星商城首页</title>
+		<link rel="stylesheet" type="text/css" href="../css/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css">
+		<link rel="stylesheet" href="../css/home.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/spring-notice.css"/>
+		<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<script type="text/javascript" src="../js/axios.js"></script>
+		<script type="text/javascript" src="../js/spring-notice.js"></script>
+        <script type="text/babel" src="../js/swiper.min.js"></script>
+        <script src="../js/lodash.min.js"></script>
+        <script>
+            // polyfill for ie 9 setPrototypeOf
+            Object.setPrototypeOf = Object.setPrototypeOf || function (obj, proto) {
+                obj.__proto__ = proto;
+            return obj;
+            }
+        </script>
+        <script src="../js/polyfill.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/babel.min.js"></script>
+        <script type="text/babel" src="../js/devtool.js"></script>
+        <script type="text/babel" src="../js/jScript.js"></script>
+        <script type="text/javascript" src="../js/O2O.js"></script>
+    </head>
+
+<body>
+
+    <nav class="cms-main">
+        <div id="wrapper">
+            <div class="loading"></div>
+            <div id="home" class="all_mc">
+                <section v-if="list.length" class="kv">
+                    <swiper-banner v-bind:jsonlist="list" v-bind:is-mobile="isMobile" swipterid="kv_swiper" omniture-class="indexKvSwiperEvent"></swiper-banner>
+                </section>
+                <marquee-component v-if="marqueeData.marqueeText" :marquee-data="marqueeData"></marquee-component>
+                <div style="height:100%;width:100%;position: relative;">
+                    <!--左侧楼层 pc-->
+                    <div class="g_my floor floor_active floatingEvent" v-if="!isMobile">
+                        <ul>
+                            <li v-for="(item, index) in leftFixedBar":button_name="item.button_name">
+                                <a @click="scrollToView(index)">
+                                    <img :src="item.pcImg" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--右边侧楼层 pc-->
+                    <div class="g_my grj  floor_active2 floatingEvent">
+                        <fixed-right-bar
+                            :is-pc-view="true"
+                            :is-mobile="isMobile"
+                            :bar-data-list="rightFixedBar"
+                        >
+                        </fixed-right-bar>
+                    </div>
+
+                    <div class="g_my menu_bottom floor_active3 rightbot_floor1" v-if="!isMobile">
+                        <fixed-right-bar
+                                :is-pc-view="true"
+                                :is-mobile="isMobile"
+                                :bar-data-list="activity"
+                                :is-activity-column="true"
+                        >
+                        </fixed-right-bar>
+                    </div>
+
+    <!--                banner -->
+                    <section class="banner">
+    <!--                小屏幕-->
+                    <div class="newtop_floor newtop_floor_active floatingEvent" v-if="!isMobile">
+                        <fixed-right-bar
+                                :is-mobile="isMobile"
+                                :bar-data-list="rightFixedBar"
+                        >
+                        </fixed-right-bar>
+                    </div>
+    <!--                移动端-->
+                    <div class="g_my floatingEvent" v-if="isMobile">
+                        <fixed-right-bar
+                                :is-mobile="isMobile"
+                                :bar-data-list="rightFixedBar"
+                                :is-show-category="true"
+                        >
+                        </fixed-right-bar>
+                    </div>
+                    <div class="g_my menu_bottom floor_active3 rightbot_floor2" v-if="isMobile">
+                        <fixed-right-bar
+                                :is-mobile="isMobile"
+                                :bar-data-list="activity"
+                                :is-activity-column="true"
+                        >
+                        </fixed-right-bar>
+                    </div>
+                    <div class="rightbot_floor3 rightbot_floor3_active" v-if="!isMobile">
+                        <fixed-right-bar
+                                :is-mobile="isMobile"
+                                :bar-data-list="activity"
+                                :is-activity-column="true"
+                        >
+                        </fixed-right-bar>
+                    </div>
+
+                    <!--左侧楼层  小屏幕-->
+                    <div class="newleft_floor newleft_floor_active floatingEvent" v-if="!isMobile">
+                        <ul>
+                            <li v-for="(item, index) in leftFixedBar":button_name="item.button_name">
+                                <a @click="scrollToView(index)">
+                                    <img :src="item.smallicon" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div v-if="list1.length" id="bannerImg">
+                        <div class="bannerImgLeft">
+                            <div v-for="(item, index) in list1" v-if="index==0">
+                                <a target="_blank" :href="item.url">
+                                    <img v-bind:src=" isMobile ? item.mobileImg:item.pcImg " v-bind:uploaded_date="item.uploaded_date" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bannerImgRight">
+                            <div v-for="(item, index) in list1" v-if="index>0">
+                                <a target="_blank" :href="item.url">
+                                    <img v-bind:src=" isMobile ? item.mobileImg:item.pcImg" v-bind:uploaded_date="item.uploaded_date" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </div>
+
+                <!--热销推荐-->
+                <section v-if="t_jian.length" class="t_jian">
+                    <div class="ts_title">
+                        <p><span></span></p>
+                        <b v-for="(item,index) in t_jian">
+                            {{item.title}}
+                        </b>
+                    </div>
+
+                    <div class="j_left">
+                        <div v-for="(item,index) in t_jian1" v-if="index<2" class="hotItemEvent">
+                            <a target="_blank" :href="item.url">
+                                <p>
+                                    <img :src="item.tag" alt="" />
+                                </p>
+                                <p><b>{{item.title}}</b></p>
+                                <p><span>{{item.subtitle}}</span></p>
+                                <p>
+                                    <strong v-if="item.salesprice">¥{{item.salesprice}}</strong>
+                                    <span v-if="item.listprice && item.listprice != item.salesprice" class="scribing_price">¥{{item.listprice}}</span>
+                                </p>
+                                <p><img class="pro_img" v-bind:src=" isMobile ? item.mobileImgmobile:item.pcImgpc " /></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="j_right">
+                        <div v-for="(item,index) in t_jian1" v-if="index>1" class="hotItemEvent">
+                            <a target="_blank" :href="item.url">
+                                <p><img :src="item.tag" alt="" /></p>
+                                <p><b>{{item.title}}</b></p>
+                                <p><span>{{item.subtitle}}</span></p>
+                                <p>
+                                    <strong v-if="item.salesprice">¥{{item.salesprice}}</strong>
+                                    <span v-if="item.listprice && item.listprice != item.salesprice" class="scribing_price">¥{{item.listprice}}</span>
+                                </p>
+                                <p><img class="pro_img" v-bind:src=" isMobile ? item.mobileImgmobile:item.pcImgpc " /></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!--手机-->
+                <section v-if="phone_list.length" class="productRecommend" id="a0">
+                    <product-recommend v-bind:jsonlist="phone_list" v-bind:is-mobile="isMobile" recommendid="phoneRecommend"></product-recommend>
+                </section>
+
+                <!--可穿戴设备-->
+                <section v-if="wear_list.length" class="productRecommend" id="a1">
+                    <product-recommend
+                            v-bind:jsonlist="wear_list"
+                            v-bind:is-mobile="isMobile"
+                            recommendid="wearRecommend"
+                            ishiddentab="true">
+                    </product-recommend>
+                </section>
+
+                <!--热销配件-->
+                <section v-if="pd_list.length" class="productRecommend" id="a2">
+                    <product-recommend v-bind:jsonlist="pd_list" v-bind:is-mobile="isMobile" recommendid="accRecommend"></product-recommend>
+                </section>
+
+                <!--个人电脑-->
+                <section v-if="computer_list.length" class="productRecommend" id="a3">
+                    <product-recommend v-bind:jsonlist="computer_list" v-bind:is-mobile="isMobile" recommendid="computerRecommend"></product-recommend>
+                </section>
+
+                <!--智能家居-->
+                <section v-if="home_list.length" class="productRecommend" id="a4">
+                    <product-recommend v-bind:jsonlist="home_list" v-bind:is-mobile="isMobile" recommendid="homeRecommend"></product-recommend>
+                </section>
+
+                <!--模块4-->
+                <div class="section benefit-section">
+                    <div class="benefit-container row">
+                        <div class="col-12-4 col-xs-12-12">
+                            <dl class="float-clearfix" service='call service center'>
+                                <dt class="icon-box float-left">
+                                    <i class="icon icon-footer-phone"></i>
+                                </dt>
+                                <dd class="benefit-info float-left">
+                                    <p>致电服务中心</p>
+                                    <p>400-071-8899</p>
+                                    <p>周一至周日<span>9:00 - 22:00</span></p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-12-4 col-xs-12-12">
+                            <dl class="float-clearfix" service='professional team'>
+                                <dt class="icon-box float-left">
+                                    <i class="icon icon-footer-service"></i>
+                                </dt>
+                                <dd class="benefit-info float-left">
+                                    <p>专业客服人员团队</p>
+                                    <p>提供当季优惠信息</p>
+                                    <p>为您推荐产品</p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-12-4 col-xs-12-12">
+                            <dl class="float-clearfix" service='official product'>
+                                <dt class="icon-box float-left">
+                                    <i class="icon icon-footer-true"></i>
+                                </dt>
+                                <dd class="benefit-info float-left">
+                                    <p>所售三星品牌产品</p>
+                                    <p>均为官方正品</p>
+                                    <p>请安心购买</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <image-mask :image-mask="imageMask"></image-mask>
+            </div>
+        </div>
+    </nav>
+    <script type="text/javascript" src="../js/newIndexTracing.js"></script>
+</body>
+
+</html>

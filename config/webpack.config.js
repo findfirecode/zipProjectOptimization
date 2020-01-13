@@ -25,7 +25,7 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'build') },
-      { from: path.join(SRC_DIRECTORY, 'environment'), to: path.join(ROOT_DIRECTORY, 'build') }
+      { from: path.join(ROOT_DIRECTORY, 'environment'), to: path.join(ROOT_DIRECTORY, 'build') }
     ])
   ],
   module: {
@@ -50,7 +50,7 @@ const config = {
         use: {
           loader: 'html-loader',
           options: {
-            attrs: [':data-src']
+            attrs: false
           }
         }
       }

@@ -1,6 +1,10 @@
 import '@babel/polyfill'
-import './styles/index.scss'  
+import './styles/index.scss'
+import variable from './environment/js/globalVariable'
 
-// document.getElementById('App').innerHTML = fs.createReadStream('./assets/newindex.html')
+// 挂载全局变量
+Object.assign(window, variable)
+
+// 挂载html
 const html = require('./assets/newindex.html')
-document.body.innerHTML = html
+document.getElementById("app").innerHTML = html

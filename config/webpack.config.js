@@ -55,9 +55,6 @@ const config = {
         }
       }
     ]
-  },
-  externals: {
-    fs: 'fs'
   }
 }
 

@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import './styles/index.scss'
-import variable from './environment/js/globalVariable'
+import variable from '../__mocks__/globalVariable'
 
 // 挂载全局变量
 Object.assign(window, variable)

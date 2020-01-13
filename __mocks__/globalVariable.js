@@ -3,7 +3,7 @@ const variable = {
     aa:11,
     bb:22
   }],
-  base: "https://stage.samsungeshop.com.cn"
+  base: "https://stage.samsungeshop.com.cn/"
 }
 
 export default variable

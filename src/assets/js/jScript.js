@@ -7,19 +7,19 @@ var home = {
         var that = this
         if (!localStorage.ptsDataCache || !isDevEnv) {
             axios.all([
-                axios.get("/store/skuCmsJson/rightFixedBar"),
-                axios.get("/store/skuCmsJson/imageMask"),
-                axios.get("/store/skuCmsJson/marquee"),
-                axios.get("/store/skuCmsJson/leftFixedBar"),
-                axios.get("/plugin/getCmsJson/activityColumn"),
-                axios.get("/plugin/getCmsJson/indexKv"),
-                axios.get("/plugin/getCmsJson/topKv"),
-                axios.get("/store/skuCmsJson/hotItem"),
-                axios.get("/store/skuCmsJson/mobileItem"),
-                axios.get("/store/skuCmsJson/computerItem"),
-                axios.get("/store/skuCmsJson/accessoryItem"),
-                axios.get("/store/skuCmsJson/homeItem"),
-                axios.get("/store/skuCmsJson/wearableItem"),
+                axios.get(base + "/store/skuCmsJson/rightFixedBar"),
+                axios.get(base + "/store/skuCmsJson/imageMask"),
+                axios.get(base + "/store/skuCmsJson/marquee"),
+                axios.get(base + "/store/skuCmsJson/leftFixedBar"),
+                axios.get(base + "/plugin/getCmsJson/activityColumn"),
+                axios.get(base + "/plugin/getCmsJson/indexKv"),
+                axios.get(base + "/plugin/getCmsJson/topKv"),
+                axios.get(base + "/store/skuCmsJson/hotItem"),
+                axios.get(base + "/store/skuCmsJson/mobileItem"),
+                axios.get(base + "/store/skuCmsJson/computerItem"),
+                axios.get(base + "/store/skuCmsJson/accessoryItem"),
+                axios.get(base + "/store/skuCmsJson/homeItem"),
+                axios.get(base + "/store/skuCmsJson/wearableItem"),
             ])
                 .then(axios.spread((
                     rightFixedBar,

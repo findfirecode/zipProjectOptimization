@@ -24,8 +24,7 @@ const config = {
       template: path.join(SRC_DIRECTORY, 'index.html')
     }),
     new CopyWebpackPlugin([
-      { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'build') },
-      { from: path.join(ROOT_DIRECTORY, 'environment'), to: path.join(ROOT_DIRECTORY, 'build') }
+      { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'build') }
     ])
   ],
   module: {

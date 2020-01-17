@@ -16,7 +16,7 @@ const copy = function(src, dst){
           if(err)throw err;
           if (_src.indexOf(".js") > 0) {
             const transformCode = babel.transformFileSync(_src, {
-                presets: ["@babel/preset-env"],
+                presets:  ["@babel/preset-env", "vue"],
             }).code
             fs.writeFileSync(_dst, transformCode)
           }else if(stats.isFile()){ //如果是个文件则拷贝 

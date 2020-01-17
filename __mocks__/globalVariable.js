@@ -1,20 +1,20 @@
 const variable = {
   couponDataMap: [{
-    aa:11,
-    bb:22
+    aa: 11,
+    bb: 22
   }],
-  isBlank: function(String str) {
+  isBlank: function (str) {
     var strLen;
     if (str == null || (strLen = str.length()) == 0) {
-        return true;
+      return true;
     }
     for (var i = 0; i < strLen; i++) {
-        if ((Character.isWhitespace(str.charAt(i)) == false)) {
-            return false;
-        }
+      if ((Character.isWhitespace(str.charAt(i)) == false)) {
+        return false;
+      }
     }
     return true;
-}
+  },
   base: "https://stage.samsungeshop.com.cn/"
 }
 

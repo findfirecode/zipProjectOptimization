@@ -3,17 +3,8 @@ const variable = {
     aa: 11,
     bb: 22
   }],
-  isBlank: function (str) {
-    var strLen;
-    if (str == null || (strLen = str.length()) == 0) {
-      return true;
-    }
-    for (var i = 0; i < strLen; i++) {
-      if ((Character.isWhitespace(str.charAt(i)) == false)) {
-        return false;
-      }
-    }
-    return true;
+  isBlank: function isBlank(str) {
+    return str == null || $.trim(str).length == 0;
   },
   base: "https://stage.samsungeshop.com.cn/"
 }

@@ -1,4 +1,4 @@
-// const babel = require('babel-core')
+const babel = require('babel-core')
 const fs = require('fs')
 const pathFn = require("path")
 
@@ -14,7 +14,12 @@ const copy = function(src, dst){
       var _dst = dst + '/' + path;
       fs.stat(_src, function(err, stats){  //stats  该对象 包含文件属性
           if(err)throw err;
-          if(stats.isFile()){ //如果是个文件则拷贝 
+          if (_src.indexOf(".js") > 0) {
+            const transformCode = babel.transformFileSync(_src, {
+                presets: ["@babel/preset-env"]
+            }).code
+            fs.writeFileSync(_dst, transformCode)
+          }else if(stats.isFile()){ //如果是个文件则拷贝 
               let  readable = fs.createReadStream(_src);//创建读取流
               let  writable = fs.createWriteStream(_dst);//创建写入流
               readable.pipe(writable);
@@ -25,7 +30,7 @@ const copy = function(src, dst){
   });
 }
 const checkDirectory = function(src,dst,callback){
-  // 验证是否有去权限
+  // 验证是否有文件权限
   fs.access(dst, fs.constants.F_OK, (err) => {
       if(err){
           fs.mkdirSync(dst);

@@ -1,4 +1,4 @@
-const babel = require('babel-core')
+const babel = require("@babel/core");
 const fs = require('fs')
 const pathFn = require("path")
 
@@ -16,7 +16,7 @@ const copy = function(src, dst){
           if(err)throw err;
           if (_src.indexOf(".js") > 0) {
             const transformCode = babel.transformFileSync(_src, {
-                presets: ["@babel/preset-env"]
+                presets: ["@babel/preset-env"],
             }).code
             fs.writeFileSync(_dst, transformCode)
           }else if(stats.isFile()){ //如果是个文件则拷贝 

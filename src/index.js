@@ -4,7 +4,6 @@ import variable from '../__mocks__/globalVariable'
 
 // 挂载全局变量
 Object.assign(window, variable)
-// Object.assign(window, $)
 window.$ = $
 
 // 挂载html

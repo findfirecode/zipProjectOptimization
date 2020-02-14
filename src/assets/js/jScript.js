@@ -63,7 +63,7 @@ var home = {
             this.homeKv(obj)
         }
     },
-    homeKv: (date) => {
+    homeKv(date) {
         //  home 的  this
         //  初始化状态
         var obj = {

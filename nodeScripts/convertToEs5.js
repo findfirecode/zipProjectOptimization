@@ -1,6 +1,9 @@
 const babel = require("@babel/core");
 const fs = require('fs')
 const pathFn = require("path")
+const ctFiles = [
+    "jScript"
+  ]
 
 // 设置根目录
 const root = "src/assets"
@@ -14,7 +17,7 @@ const copy = function (src, dst) {
         var _dst = dst + '/' + path;
         fs.stat(_src, function (err, stats) {  //stats  该对象 包含文件属性
             if (err) throw err;
-            if (_src.match(/\.js$/) && !_src.match(/\.min\.js$/)) {
+            if (ctFiles.filter(c => _src.match(c)).length) {
                 const transformCode = babel.transformFileSync(_src, {
                     presets: ["@babel/preset-env"],
                 }).code
@@ -67,4 +70,5 @@ var emptyDir = function (fileUrl) {
 
 emptyDir(pathFn.resolve(distDir))
 checkDirectory(pathFn.resolve(root), pathFn.resolve(distDir), copy);
+
 

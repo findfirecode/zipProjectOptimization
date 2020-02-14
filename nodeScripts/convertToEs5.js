@@ -14,7 +14,7 @@ const copy = function (src, dst) {
         var _dst = dst + '/' + path;
         fs.stat(_src, function (err, stats) {  //stats  该对象 包含文件属性
             if (err) throw err;
-            if (_src.indexOf(".js") > 0) {
+            if (_src.match(/\.js$/) && !_src.match(/\.min\.js$/)) {
                 const transformCode = babel.transformFileSync(_src, {
                     presets: ["@babel/preset-env"],
                 }).code

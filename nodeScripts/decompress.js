@@ -55,3 +55,9 @@ compressing.zip.uncompress(path.resolve(`./${sourseName}`), path.resolve(`./src/
   .catch(err => {
     console.log("解压失败");
   })
+
+const jsonPath = path.resolve('./__mocks__/globalVariable.json')
+const variableString = fs.readFileSync(jsonPath, 'utf-8')
+const variable = JSON.parse(variableString)
+variable.sourseDir = sourseDirName
+fs.writeFileSync(jsonPath, JSON.stringify(variable, "", "\t"))

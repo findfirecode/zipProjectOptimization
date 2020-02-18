@@ -1,13 +1,16 @@
 import '@babel/polyfill'
 import $ from 'jquery';
 import axios from 'axios'
-import variable from '../__mocks__/globalVariable'
+import mockFun from '../__mocks__/globalVariable'
 
 // 挂载全局变量
+const variable = require('../__mocks__/globalVariable.json')
 Object.assign(window, variable)
+Object.assign(window, mockFun)
 window.$ = $
 window.axios = axios
 
 // 挂载html
-const html = require('./assets/newindex.html')
+const html = require(`./assets/${variable.sourseDir}.html`)
 $('#app').html(html)
+

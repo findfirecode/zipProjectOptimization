@@ -1,0 +1,8 @@
+{
+  "couponDataMap": [{
+    "aa": 11,
+    "bb": 22
+  }],
+  "base": "https://stage.samsungeshop.com.cn/",
+  "sourseDir": "sss"
+}

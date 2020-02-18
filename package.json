@@ -10,6 +10,7 @@
     "clean": "shx rm -rf build",
     "webpack": "webpack --config config/webpack.config.production.js",
     "zip": "node nodeScripts/convertToEs5.js",
+    "unzip": "node nodeScripts/decompress.js",
     "sass": "node-sass src/styles/index.scss build/index.css --output-style compressed",
     "build": "npm run clean && npm run webpack",
     "lint": "eslint src config",

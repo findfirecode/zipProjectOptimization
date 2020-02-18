@@ -38,4 +38,4 @@ node_modules
 # Ignore build files
 public
 outputZip
-sss
+*.zip

@@ -10,9 +10,9 @@ const ctFiles = [
 const sourseName = fs.readdirSync("./").find(filename => { return filename.match(/\.zip$/) })
 // 设置根目录
 const root = "src/assets"
-// 设置目标目录
-const distDir = sourseName.match(/(.*)\.zip$/)[1]
 const outputPath = "outputZip"
+// 设置目标目录
+const distDir = outputPath + "/" + sourseName.match(/(.*)\.zip$/)[1]
 
 const copyFile = function (src, dst) {
     let paths = fs.readdirSync(src); //同步读取当前目录
@@ -22,7 +22,6 @@ const copyFile = function (src, dst) {
         var _dst = dst + '\\' + path;
 
         fs.stat(_src, function (err, stats) {  //stats  该对象 包含文件属性
-            // creatDir(_dst)
             if (ctFiles.filter(c => _src.match(c)).length) {
                 const transformCode = babel.transformFileSync(_src, {
                     presets: ["@babel/preset-env"],
@@ -52,7 +51,10 @@ const compossZipDir = function () {
         fs.mkdirSync(`./${outputPath}`);
     }
 
-    clearDir(pathFn.resolve(outputPath))
+    // 清空之前的zip
+    const zipName = fs.readdirSync("./outputZip").find(filename => { return filename.match(/\.zip$/) })
+    zipName && fs.unlinkSync(pathFn.resolve(`./${outputPath}/${zipName}`))
+
     compressing.zip
         .compressDir(pathFn.resolve(distDir), pathFn.resolve("./", outputPath, sourseName))
         .then(() => {
@@ -79,16 +81,18 @@ const clearDir = function (fileUrl) {
         }
     })
 }
-const deletDir = function(fileUrl) {
+const deletDir = function (fileUrl) {
     clearDir(fileUrl)
 
     if (fs.existsSync(fileUrl)) fs.rmdirSync(fileUrl)
 }
 
-// creatDir(pathFn.resolve(distDir))
-// 清空并删除文件
-clearDir(pathFn.resolve(distDir))
-copyFile(pathFn.resolve(root), pathFn.resolve(distDir));
-compossZipDir()
-clearDir(fileUrl)
-// deletDir(pathFn.resolve(distDir))
+if (!fs.existsSync(pathFn.resolve(distDir))) {
+    console.log("请放入源代码并且执行npm build");
+} else {
+    // 清空并删除文件
+    clearDir(pathFn.resolve(distDir))
+    copyFile(pathFn.resolve(root), pathFn.resolve(distDir));
+    compossZipDir()
+
+}

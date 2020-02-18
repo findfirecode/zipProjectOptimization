@@ -7,7 +7,7 @@ const sourseDirName = sourseName.match(/(.*)\.zip$/)[1]
 const creatDir = function (dst) {
   // 验证是否有文件权限
   if (!fs.existsSync(dst)) {
-      fs.mkdirSync(dst);
+    fs.mkdirSync(dst);
   }
 }
 const copyFile = function (src, dst) {
@@ -17,14 +17,13 @@ const copyFile = function (src, dst) {
     var _src = src + '\\' + path;
     var _dst = dst + '\\' + path;
 
-    fs.stat(_src, function (err, stats) {  //stats  该对象 包含文件属性
-      if (stats.isFile()) { //如果是个文件则拷贝 
-        fs.renameSync(_src, _dst)
-      } else if (stats.isDirectory()) { //是目录则 递归 
-        creatDir(_dst)
-        copyFile(_src, _dst)
-      }
-    })
+    let stats = fs.statSync(_src)
+    if (stats.isFile()) { //如果是个文件则拷贝 
+      fs.renameSync(_src, _dst)
+    } else if (stats.isDirectory()) { //是目录则 递归 
+      creatDir(_dst)
+      copyFile(_src, _dst)
+    }
   })
 }
 const clearDir = function (fileUrl) {
@@ -47,8 +46,11 @@ clearDir(path.resolve("./src/assets"))
 compressing.zip.uncompress(path.resolve(`./${sourseName}`), path.resolve(`./src/assets`))
   .then(() => {
     copyFile(path.resolve(`./src/assets/${sourseDirName}`), path.resolve("./src/assets"))
-    console.log("移动成功");
-    // clearDir(path.resolve(`./src/assets/${sourseDirName}`))
+    const tempDir = path.resolve(`./src/assets/${sourseDirName}`)
+    clearDir(tempDir)
+    fs.rmdirSync(tempDir)
+    creatDir(path.resolve(`./outputZip/${sourseDirName}`))
+    console.log("解压成功")
   })
   .catch(err => {
     console.log("解压失败");

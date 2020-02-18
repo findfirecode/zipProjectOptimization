@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "shx rm -rf build",
     "webpack": "webpack --config config/webpack.config.production.js",
-    "balbelpack": "node nodeScripts/convertToEs5.js",
+    "zip": "node nodeScripts/convertToEs5.js",
     "sass": "node-sass src/styles/index.scss build/index.css --output-style compressed",
     "build": "npm run clean && npm run webpack",
     "lint": "eslint src config",
@@ -78,6 +78,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "html-loader": "^0.5.5"
+    "html-loader": "^0.5.5",
+    "compressing": "^1.5.0"
   }
 }

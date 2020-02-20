@@ -24,20 +24,13 @@ const config = {
       template: path.join(SRC_DIRECTORY, 'index.html')
     }),
     new CopyWebpackPlugin([
-      { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'build') }
+      { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'build') },
+      { from: path.join(SRC_DIRECTORY, 'dependence'), to: path.join(ROOT_DIRECTORY, 'build') },
     ])
   ],
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader',
-      //     'sass-loader'
-      //   ]
-      // },
       {
         test: /\.(png|svg|jpg|gif|pdf)$/,
         use: [

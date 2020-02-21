@@ -28,9 +28,6 @@ const copyFile = function (src, dst) {
                 }).code
                 fs.writeFileSync(_dst, transformCode)
             } else if (stats.isFile()) { //如果是个文件则拷贝 
-                // let readable = fs.createReadStream(_src);//创建读取流
-                // let writable = fs.createWriteStream(_dst);//创建写入流
-                // readable.pipe(writable);
                 fs.copyFileSync(_src, _dst)
             } else if (stats.isDirectory()) { //是目录则 递归 
                 creatDir(_dst)
@@ -88,7 +85,7 @@ const deletDir = function (fileUrl) {
 }
 
 if (!fs.existsSync(pathFn.resolve(distDir))) {
-    console.log("请放入源代码并且执行npm build");
+    console.log("请放入源代码并且执行npm unzip");
 } else {
     // 清空并删除文件
     clearDir(pathFn.resolve(distDir))

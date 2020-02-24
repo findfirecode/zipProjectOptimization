@@ -6,8 +6,13 @@ const ctFiles = [
     "jScript"
 ]
 
+const jsonPath = pathFn.resolve('./__mocks__/globalVariable.json')
+const variableString = fs.readFileSync(jsonPath, 'utf-8')
+const variable = JSON.parse(variableString)
+
 // 获取资源文件名
-const sourseName = fs.readdirSync("./").find(filename => { return filename.match(/\.zip$/) })
+const sourseName = variable.sourseDir + ".zip"
+
 // 设置根目录
 const root = "src/assets"
 const outputPath = "outputZip"
@@ -80,9 +85,9 @@ const clearDir = function (fileUrl) {
 }
 const deletDir = function (fileUrl) {
     clearDir(fileUrl)
-
     if (fs.existsSync(fileUrl)) fs.rmdirSync(fileUrl)
 }
+
 
 if (!fs.existsSync(pathFn.resolve(distDir))) {
     console.log("请放入源代码并且执行npm unzip");

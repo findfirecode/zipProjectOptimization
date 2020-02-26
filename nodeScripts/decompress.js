@@ -1,16 +1,13 @@
 const compressing = require('compressing')
 const path = require("path")
 const fs = require('fs')
-const sourseName = fs.readdirSync("./").find(filename => { return filename.match(/\.zip$/) })
+const { clearDir , creatDir , deletDir } = require("./util")
+
+const proFiles = fs.readdirSync("./")
+const sourseName = proFiles.find(filename => { return filename.match(/\.zip$/) })
 const sourseDirName = sourseName.match(/(.*)\.zip$/)[1]
 
-const creatDir = function (dst) {
-  // 验证是否有文件权限
-  if (!fs.existsSync(dst)) {
-    fs.mkdirSync(dst);
-  }
-}
-const copyFile = function (src, dst) {
+function copyFile(src, dst) {
   let paths = fs.readdirSync(src); //同步读取当前目录
 
   paths.forEach(function (path) {
@@ -26,38 +23,36 @@ const copyFile = function (src, dst) {
     }
   })
 }
-const clearDir = function (fileUrl) {
-  if (!fs.existsSync(fileUrl)) return
 
-  const files = fs.readdirSync(fileUrl);//读取该文件夹
-  files.forEach(function (file) {
-    let filePath = fileUrl + '\\' + file
-    let stats = fs.statSync(filePath);
-    if (stats.isDirectory()) {
-      clearDir(filePath)
-      fs.rmdirSync(filePath);
-    } else {
-      fs.unlinkSync(filePath);
-    }
-  })
+
+function writeTargetProjectName() {
+  const jsonPath = path.resolve('./__mocks__/globalVariable.json')
+  const variableString = fs.readFileSync(jsonPath, 'utf-8')
+  const variable = JSON.parse(variableString)
+  variable.sourseDir = sourseDirName
+  fs.writeFileSync(jsonPath, JSON.stringify(variable, "", "\t"))
 }
 
-clearDir(path.resolve("./src/assets"))
-compressing.zip.uncompress(path.resolve(`./${sourseName}`), path.resolve(`./src/assets`))
-  .then(() => {
-    copyFile(path.resolve(`./src/assets/${sourseDirName}`), path.resolve("./src/assets"))
-    const tempDir = path.resolve(`./src/assets/${sourseDirName}`)
-    clearDir(tempDir)
-    fs.rmdirSync(tempDir)
-    creatDir(path.resolve(`./outputZip/${sourseDirName}`))
-    console.log("解压成功")
-  })
-  .catch(err => {
-    console.log("解压失败");
-  })
+function main() {
+  clearDir(path.resolve("./src/assets"))
 
-const jsonPath = path.resolve('./__mocks__/globalVariable.json')
-const variableString = fs.readFileSync(jsonPath, 'utf-8')
-const variable = JSON.parse(variableString)
-variable.sourseDir = sourseDirName
-fs.writeFileSync(jsonPath, JSON.stringify(variable, "", "\t"))
+  if (proFiles.filter(name => name.match(/\.zip$/)).length > 1) {
+    console.log('请保证项目目录下只有一个zip包');
+    return
+  }
+
+  const assFilePath = path.resolve(`./src/assets`)
+  compressing.zip.uncompress(path.resolve(`./${sourseName}`), assFilePath)
+    .then(() => {
+      copyFile(path.resolve(`./src/assets/${sourseDirName}`), assFilePath)
+      deletDir(path.resolve(`./src/assets/${sourseDirName}`))
+      creatDir(path.resolve(`./outputZip/${sourseDirName}`))
+      writeTargetProjectName()
+      console.log("解压成功")
+    })
+    .catch(err => {
+      console.log("解压失败");
+    })
+}
+
+main()

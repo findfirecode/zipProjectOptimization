@@ -39,7 +39,9 @@ const copyFile = function (src, dst, convertDir) {
 
     let stats = fs.statSync(_src)
     if (stats.isFile()) { //如果是个文件则拷贝 
-      if (convertDir && convertDir.filter(c => _src.match(c)).length) {
+      
+      if (convertDir.length && !_src.match(/jsp$/) &&convertDir.filter(name => _src.match(name)).length) {
+      console.log(3, _src);
         let transformCode = babel.transformFileSync(_src, {
           presets: ["@babel/preset-env"],
         }).code
@@ -49,7 +51,7 @@ const copyFile = function (src, dst, convertDir) {
       }
     } else if (stats.isDirectory()) { //是目录则 递归 
       creatDir(_dst)
-      copyFile(_src, _dst)
+      copyFile(_src, _dst, convertDir)
     }
   });
 }

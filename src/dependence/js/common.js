@@ -298,9 +298,8 @@ $(function() {
 	// var headerOffsetT = $('.header').offset().top;
 	$(window).scroll(
 			function() {
-				var wH = $(window).scrollTop(), containerTop = $('.container')
-						.offset().top
-						- wH;
+				var wH = $(window).scrollTop()
+				var containerTop = $('.container').length ? $('.container').offset().top- wH : 0
 
 				// 兼容顶部通栏
 				if(!$('#topFenceContent').is(':hidden')) {

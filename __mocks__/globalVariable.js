@@ -1,4 +1,14 @@
-const mockFun = {
+// 模拟应用所需要的的变量
+const applicationVariable = {
+	"couponDataMap": [
+		{
+			"aa": 11,
+			"bb": 22
+		}
+	],
+}
+// 模拟应用所需要的的fun
+const applicationFun = {
   isBlank: function isBlank(str) {
     return str == null || $.trim(str).length == 0;
   },
@@ -19,4 +29,10 @@ const mockFun = {
   }
 }
 
-export default mockFun
+// 模拟脚本所需要的变量
+const baseVariable = {
+	"sourseDir": ""
+}
+
+Object.assign(applicationVariable, baseVariable, applicationFun)
+module.exports = applicationVariable

@@ -54,8 +54,8 @@ const copyFile = function (src, dst, convertDir) {
   });
 }
 
-const getTargetDirName = function () {
-  const variableString = fs.readFileSync(path.resolve('./__mocks__/globalVariable.json'), 'utf-8')
+const getTargetDirObj = function () {
+  const variableString = fs.readFileSync(path.resolve('./src/dependence/json/compress.json'), 'utf-8')
   return JSON.parse(variableString)
 }
 
@@ -64,5 +64,5 @@ module.exports = {
   creatDir,
   deletDir,
   copyFile,
-  getTargetDirName
+  getTargetDirObj
 }

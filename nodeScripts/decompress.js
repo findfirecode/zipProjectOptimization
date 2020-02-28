@@ -15,6 +15,7 @@ function writeTargetProjectName() {
 
 function main() {
   clearDir(path.resolve("./src/assets"))
+  creatDir(path.resolve("./outputZip"))
 
   if (proFiles.filter(name => name.match(/\.zip$/)).length > 1) {
     console.log('请保证项目目录下只有一个zip包');

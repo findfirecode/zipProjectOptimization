@@ -1,16 +1,17 @@
 const compressing = require('compressing')
 const path = require("path")
 const fs = require('fs')
-const { clearDir , creatDir , deletDir, copyFile, getTargetDirName } = require("./util")
+const { clearDir , creatDir , deletDir, copyFile, getTargetDirObj} = require("./util")
+const baseVar = require("./")
 
 const proFiles = fs.readdirSync("./")
 const sourseName = proFiles.find(filename => { return filename.match(/\.zip$/) })
 const sourseDirName = sourseName.match(/(.*)\.zip$/)[1]
 
 function writeTargetProjectName() {
-  let variable = getTargetDirName()
+  let variable = getTargetDirObj()
   variable.sourseDir = sourseDirName
-  fs.writeFileSync(path.resolve('./__mocks__/globalVariable.json'), JSON.stringify(variable, "", "\t"))
+  fs.writeFileSync(path.resolve('./src/dependence/json/compress.json'), JSON.stringify(variable, "", "\t"))
 }
 
 function main() {

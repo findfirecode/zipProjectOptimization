@@ -2,12 +2,12 @@ const babel = require("@babel/core");
 const fs = require('fs')
 const compressing = require('compressing')
 const path = require("path")
-const { clearDir , creatDir , deletDir, copyFile, getTargetDirName } = require("./util")
+const { clearDir , creatDir , deletDir, copyFile, getTargetDirObj } = require("./util")
 const ctFiles = [
     "jScript"
 ]
 
-const variable = getTargetDirName()
+const variable = getTargetDirObj()
 // 获取资源文件名
 const sourseName = variable.sourseDir + ".zip"
 

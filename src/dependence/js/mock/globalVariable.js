@@ -29,10 +29,5 @@ const applicationFun = {
   }
 }
 
-// 模拟脚本所需要的变量
-const baseVariable = {
-	"sourseDir": ""
-}
-
-Object.assign(applicationVariable, baseVariable, applicationFun)
+Object.assign(applicationVariable, applicationFun)
 module.exports = applicationVariable

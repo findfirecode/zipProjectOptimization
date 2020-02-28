@@ -2,13 +2,13 @@ import '@babel/polyfill'
 import $ from 'jquery';
 
 // 挂载全局变量
-const variable = require('../__mocks__/globalVariable.js')
-
+const variable = require('./dependence/js/mock/globalVariable.js')
+const compressJson = require('./dependence/json/compress.json')
 Object.assign(window, variable)
 
 // 挂载html
-if (variable.sourseDir) {
-  const html = require(`./assets/${variable.sourseDir}.html`)
+if (compressJson.sourseDir) {
+  const html = require(`./assets/${compressJson.sourseDir}.html`)
   $('#app').html(html)
 }
 

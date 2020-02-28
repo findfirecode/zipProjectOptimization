@@ -3,9 +3,6 @@ const fs = require('fs')
 const compressing = require('compressing')
 const path = require("path")
 const { clearDir , creatDir , deletDir, copyFile, getTargetDirObj } = require("./util")
-const ctFiles = [
-    "jScript"
-]
 
 const variable = getTargetDirObj()
 // 获取资源文件名
@@ -40,7 +37,7 @@ function main() {
         creatDir(path.resolve(distDir))
         // 清空并删除文件
         clearDir(path.resolve(distDir))
-        copyFile(path.resolve(root), path.resolve(distDir));
+        copyFile(path.resolve(root), path.resolve(distDir), variable.convertDir);
         compossZipDir()
     }
 }

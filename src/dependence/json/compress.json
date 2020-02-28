@@ -1,3 +1,6 @@
 {
-	"sourseDir": "galaxyZFlip"
+	"sourseDir": "galaxyZFlip",
+	"convertDir": [
+		"jScript"
+	]
 }

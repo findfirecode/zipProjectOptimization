@@ -40,7 +40,7 @@ const copyFile = function (src, dst, convertDir) {
     let stats = fs.statSync(_src)
     if (stats.isFile()) { //如果是个文件则拷贝 
       
-      if (convertDir.length && !_src.match(/jsp$/) &&convertDir.filter(name => _src.match(name)).length) {
+      if (convertDir && !_src.match(/jsp$/) &&convertDir.filter(name => _src.match(name)).length) {
       console.log(3, _src);
         let transformCode = babel.transformFileSync(_src, {
           presets: ["@babel/preset-env"],

@@ -34,8 +34,11 @@ function main() {
     if (!variable.sourseDir) {
         console.log("请放入源代码并且执行npm unzip");
     } else {
+        // 删除缓存zip
+        const reseultPath = path.resolve(`${outputPath}/${sourseName}`)
+        if (fs.existsSync(reseultPath)) fs.unlinkSync(reseultPath)
         creatDir(path.resolve(distDir))
-        // 清空并删除文件
+        // 清空并删除缓存文件夹
         clearDir(path.resolve(distDir))
         copyFile(path.resolve(root), path.resolve(distDir), variable.convertDir);
         compossZipDir()

@@ -41,7 +41,7 @@ const copyFile = function (src, dst, convertDir) {
     if (stats.isFile()) { //如果是个文件则拷贝 
       
       if (convertDir && !_src.match(/jsp$/) &&convertDir.filter(name => _src.match(name)).length) {
-      console.log(3, _src);
+      console.log("转化es5文件的路径", _src);
         let transformCode = babel.transformFileSync(_src, {
           presets: ["@babel/preset-env"],
         }).code

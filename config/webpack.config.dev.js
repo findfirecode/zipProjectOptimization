@@ -11,7 +11,7 @@ config.devServer = {
     '/api': {
       target: "https://stage.samsungeshop.com.cn", //开发环境
       changeOrigin: true,
-      secure: false,
+      secure: true,
       pathRewrite: {
         '^/api': ''
       }

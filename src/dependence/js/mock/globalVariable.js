@@ -1,11 +1,10 @@
 // 模拟应用所需要的的变量
 const applicationVariable = {
-	"couponDataMap": [
-		{
-			"aa": 11,
-			"bb": 22
-		}
-	],
+	'couponDataMap' : [
+    {"activeMark":1,"couponId":494,"couponName":"会员周签到优惠10元券","couponType":1,"discount":10,"endTime":1640966400000,"id":51,"isused":0,"showAccount":true,"startTime":1577808000000,"useUrl":"https://stage.samsungeshop.com.cn","version":1564996858890},
+    {"activeMark":1,"couponId":462,"couponName":"测试优惠券A0805","couponType":1,"discount":100,"endTime":1640966400000,"id":50,"isused":0,"itemCodes":"SM-G9650","showAccount":true,"startTime":1545235200000,"supportTourists":true,"useUrl":"https://stage.samsungeshop.com.cn","version":1564996858890},
+    {"activeMark":1,"couponId":75,"couponName":"C7免单优惠券","couponType":1,"discount":10,"endTime":1640966400000,"id":47,"isused":0,"itemCodes":"null","showAccount":true,"startTime":1467165600000,"supportTourists":true,"useUrl":"/activity/InSelling20180129.htm?m01=fe51696e-6904-4150-abb0-28255cb4803b","version":1564991833863}
+  ],
 }
 // 模拟应用所需要的的fun
 const applicationFun = {

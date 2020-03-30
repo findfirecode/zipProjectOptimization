@@ -13,6 +13,9 @@ npm run install
 #### 准备
 将代码包(zip文件)放在项目根目录
 
+> 注意: 项目根目录下只能保持一个zip文件
+> 替换根目录下的zip文件后,需要重新执行npm run unzip,否则内容不变
+
 #### 解压源代码
 ```
 npm run unzip

@@ -15,7 +15,7 @@ npm run install
 
 #### 解压源代码
 ```
-npm run zip
+npm run unzip
 ```
 
 #### build

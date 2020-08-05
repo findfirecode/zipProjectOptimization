@@ -9,7 +9,7 @@ config.devServer = {
   // host: "10.110.6.156",
   proxy: {
     '/api': {
-      target: "https://stage.samsungeshop.com.cn", //开发环境
+      target: "https://uat.samsungeshop.com.cn",  //开发环境
       changeOrigin: true,
       secure: true,
       pathRewrite: {

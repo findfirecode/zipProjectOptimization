@@ -252,3 +252,11 @@ if (document.cookie.length>0)
   }
 return "";
 }
+
+// 封装lodash get方法
+function get(obj, path, defaultValue) {
+  var result = _.get(obj, path, defaultValue)
+  return _.isNull(result) && defaultValue ?
+    defaultValue :
+    result
+}
